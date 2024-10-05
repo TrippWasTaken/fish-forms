@@ -33,3 +33,19 @@ export const fakeFish = [
     fishNames: ['Tamara', 'Helene', 'Bush', 'Edward', 'Hilda']
   }
 ]
+
+export const fishProps = {
+  sizeRange: [120, 250],
+  colorRange: [
+    '#9e0142',
+    '#5e4fa2',
+    '#fdae61',
+    '#fee08b',
+    '#d53e4f',
+    '#66c2a5',
+    '#f46d43',
+    '#e6f598',
+    '#abdda4',
+    '#3288bd'
+  ]
+}
