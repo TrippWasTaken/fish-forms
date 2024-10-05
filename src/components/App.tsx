@@ -3,6 +3,7 @@ import { DummyTank } from './dummyTank'
 import { Welcome } from './welcome'
 import { motion } from 'framer-motion'
 import { FormOne } from './formOne'
+import { FormTwo } from './formTwo'
 
 function App() {
   return (
@@ -55,6 +56,9 @@ function App() {
 
       {/* form one */}
       <FormOne />
+
+      {/* form two */}
+      <FormTwo />
     </div>
   )
 }
