@@ -114,6 +114,7 @@ export const FormOneCreator = ({ setFishGrid, fishGrid }) => {
             <div className="relative my-4 h-20 w-full">
               <motion.div
                 className="absolute h-20 w-full rounded-3xl bg-white shadow-md"
+                initial={{ width: '0%' }}
                 animate={{
                   width: fishRotate ? '100%' : '0%'
                 }}

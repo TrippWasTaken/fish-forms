@@ -2,21 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { random } from 'utils'
 import { fishProps } from 'utils/fishTanks'
 import { FishTwoSVG } from './fishTwoSVG'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
-function FormTwoSpawnFish({ fishCount, tankSize }) {
-  const [fish, setFish] = useState<{ x: number; y: number }[]>([])
-
+function FormTwoSpawnFish({
+  fishCount,
+  tankSize,
+  setFish,
+  fish,
+  setDragging,
+  rmRef
+}) {
   const maxSize = fishProps.sizeRange[1]
   const cols = Math.floor(tankSize.clientWidth / maxSize)
-
-  console.log((tankSize.clientWidth + 100) / maxSize)
-
-  console.log('width', tankSize.clientWidth, tankSize.clientHeight)
   const rows = Math.floor((tankSize.clientHeight - 100) / maxSize)
-
-  const totalSpace = cols * rows
-  console.log(totalSpace, cols, rows)
 
   const allCells: { x: number; y: number }[] = []
   for (let row = 0; row < rows; row++) {
@@ -39,19 +37,19 @@ function FormTwoSpawnFish({ fishCount, tankSize }) {
     setFish(randomPositions.slice(0, fishCount))
   }, [])
   return (
-    <>
-      <div style={{ position: 'absolute', height: 1, width: 1 }}></div>
-      <AnimatePresence>
-        {fish.map((item, i) => (
-          <FishTwoSVG
-            key={i}
-            type={1}
-            position={{ x: item.x, y: item.y }}
-            size={maxSize}
-          />
-        ))}
-      </AnimatePresence>
-    </>
+    <AnimatePresence>
+      {fish.map((item, i) => (
+        <FishTwoSVG
+          rmRef={rmRef}
+          setDragging={setDragging}
+          tankSize={tankSize}
+          index={i}
+          key={i}
+          position={{ x: item.x, y: item.y }}
+          size={maxSize}
+        />
+      ))}
+    </AnimatePresence>
   )
 }
 

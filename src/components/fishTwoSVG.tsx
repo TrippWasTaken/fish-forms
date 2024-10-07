@@ -1,7 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import React from 'react'
+import React, { useState } from 'react'
 
-export const FishTwoSVG = ({ type = 1, position, size }) => {
+export const FishTwoSVG = ({
+  position,
+  size,
+  index,
+  tankSize,
+  setDragging,
+  rmRef
+}) => {
+  const [type, setType] = useState(1)
   return (
     <motion.div
       style={{
@@ -12,15 +20,38 @@ export const FishTwoSVG = ({ type = 1, position, size }) => {
         top: position.y,
         left: position.x
       }}
-      initial={{ left: 0 }}
+      initial={{ left: -400 }}
+      transition={{
+        delay: index * 0.25,
+        ease: 'easeInOut'
+      }}
       animate={{ left: position.x }}
       exit={{ left: '100%' }}
     >
       <AnimatePresence mode="wait">
         {type === 1 && (
           <motion.svg
-            key="1"
-            animate={{ opacity: 1, scale: 1 }}
+            key={`fish_${index}`}
+            initial={{ translateY: 0 }}
+            onDoubleClick={() =>
+              setType((prev) => (prev + 1 > 3 ? 1 : prev + 1))
+            }
+            animate={{ opacity: 1, scale: 1, translateY: -10 }}
+            drag
+            dragSnapToOrigin
+            onDragStart={(event, info) => {
+              setDragging(true)
+              console.log(info.point.x, info.point.y)
+            }}
+            onDragEnd={(event, info) => {
+              setDragging(false)
+            }}
+            transition={{
+              delay: index * 0.25,
+              repeat: Infinity,
+              repeatType: 'mirror',
+              duration: 1
+            }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="-20 0 600 512"
             style={{
@@ -36,8 +67,27 @@ export const FishTwoSVG = ({ type = 1, position, size }) => {
 
         {type === 2 && (
           <motion.svg
-            key="2"
-            animate={{ opacity: 1, scale: 1 }}
+            key={`fish_${index}`}
+            initial={{ translateY: 0 }}
+            onDoubleClick={() =>
+              setType((prev) => (prev + 1 > 3 ? 1 : prev + 1))
+            }
+            animate={{ opacity: 1, scale: 1, translateY: -10 }}
+            drag
+            dragSnapToOrigin
+            onDragStart={(event, info) => {
+              setDragging(true)
+              console.log(info.point.x, info.point.y)
+            }}
+            onDragEnd={(event, info) => {
+              setDragging(false)
+            }}
+            transition={{
+              delay: index * 0.25,
+              repeat: Infinity,
+              repeatType: 'mirror',
+              duration: 1
+            }}
             xmlns="http://www.w3.org/2000/svg"
             style={{
               width: '100%',
@@ -53,8 +103,27 @@ export const FishTwoSVG = ({ type = 1, position, size }) => {
 
         {type === 3 && (
           <motion.svg
-            key="3"
-            animate={{ opacity: 1, scale: 1 }}
+            key={`fish_${index}`}
+            initial={{ translateY: 0 }}
+            onDoubleClick={() =>
+              setType((prev) => (prev + 1 > 3 ? 1 : prev + 1))
+            }
+            animate={{ opacity: 1, scale: 1, translateY: -10 }}
+            drag
+            dragSnapToOrigin
+            onDragStart={(event, info) => {
+              setDragging(true)
+              console.log(info.point.x, info.point.y)
+            }}
+            onDragEnd={(event, info) => {
+              setDragging(false)
+            }}
+            transition={{
+              delay: index * 0.25,
+              repeat: Infinity,
+              repeatType: 'mirror',
+              duration: 1
+            }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="-20 0 550 512"
             style={{
