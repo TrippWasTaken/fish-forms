@@ -2,13 +2,14 @@ import { AnimatePresence, AnimationDefinition, motion } from 'framer-motion'
 import { FC } from 'react'
 
 type Props = {
-  size: number
-  color: number
-  shape: number
-  rotate: number
-  type: number
+  size?: number
+  color?: number
+  shape?: number
+  rotate?: number
+  type: number | null
   createFish?: () => void
   currCount?: number
+  bgDisable?: boolean
 }
 export const FishSVG: FC<Props> = ({
   size = 100,
@@ -17,7 +18,8 @@ export const FishSVG: FC<Props> = ({
   rotate = 0,
   type = 1,
   createFish,
-  currCount
+  currCount,
+  bgDisable = false
 }) => {
   const colors = [
     '#9e0142',
@@ -67,16 +69,18 @@ export const FishSVG: FC<Props> = ({
         }
       }}
     >
-      <motion.div
-        className="size-full shadow-lg"
-        animate={{
-          borderRadius: getShape(),
-          rotate,
-          backgroundColor: colors[color]
-        }}
-      ></motion.div>
+      {!bgDisable && (
+        <motion.div
+          className="size-full shadow-lg"
+          animate={{
+            borderRadius: getShape(),
+            rotate,
+            backgroundColor: colors[color]
+          }}
+        />
+      )}
       <motion.div className="absolute bottom-1/2 left-1/2 aspect-square w-11/12 -translate-x-1/2 translate-y-1/2">
-        <AnimatePresence mode="wait" initial>
+        <AnimatePresence mode="wait">
           {type === 1 && (
             <motion.svg
               key="1"

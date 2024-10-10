@@ -1,11 +1,22 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { FishSVG } from './fishSVG'
 import { motion } from 'framer-motion'
 
-export const FishGrid = ({ fish, setFish, targetIndex }) => {
+export const FishGrid: FC<{
+  fish: {
+    fishSize: number
+    fishRotate: boolean
+    fishShape: number
+    fishColor: number
+    fishType: number
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setFish: any
+  targetIndex?: number
+}> = ({ fish, setFish, targetIndex }) => {
   const [hover, setHover] = useState(false)
   return (
-    <div className="relative flex aspect-square h-[256px] items-center justify-center place-self-center overflow-hidden rounded-3xl border-2 border-zinc-800 bg-gradient-to-t from-slate-50/10 via-slate-300/10 to-slate-50/10 shadow-md ">
+    <motion.div className="relative flex aspect-square h-[256px] items-center justify-center place-self-center overflow-hidden rounded-3xl border-2 border-zinc-800 bg-gradient-to-t from-slate-50/10 via-slate-300/10 to-slate-50/10 shadow-md ">
       <motion.button
         initial={{ opacity: 0 }}
         onMouseEnter={() => fish && setHover(true)}
@@ -14,11 +25,14 @@ export const FishGrid = ({ fish, setFish, targetIndex }) => {
           opacity: hover ? 1 : 0
         }}
         onDoubleClick={() => {
-          setFish((prev) => {
-            const newArr = prev.filter((_, index) => index !== targetIndex)
+          setFish((prev: unknown[]) => {
+            const newArr = prev.filter(
+              (_: unknown, index: number | undefined) => index !== targetIndex
+            )
 
             return newArr
           })
+          setHover(false)
         }}
         className="absolute z-[100] flex size-full cursor-pointer items-center justify-center bg-error/75 text-3xl"
       >
@@ -43,6 +57,6 @@ export const FishGrid = ({ fish, setFish, targetIndex }) => {
           />
         </motion.div>
       )}
-    </div>
+    </motion.div>
   )
 }

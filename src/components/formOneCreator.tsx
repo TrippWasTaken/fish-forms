@@ -1,9 +1,19 @@
 /* eslint-disable tailwindcss/no-custom-classname */
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { easeIn, easeInOut, motion } from 'framer-motion'
 import { FishSVG } from './fishSVG'
 
-export const FormOneCreator = ({ setFishGrid, fishGrid }) => {
+export const FormOneCreator: FC<{
+  fishGrid: {
+    fishColor: number
+    fishRotate: boolean
+    fishShape: number
+    fishSize: number
+    fishType: number
+  }[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setFishGrid: any
+}> = ({ setFishGrid, fishGrid }) => {
   const [fishSize, setFishSize] = useState(100)
   const [fishShape, setFishShape] = useState(100)
   const [fishRotate, setFishRotate] = useState(false)
@@ -30,7 +40,7 @@ export const FormOneCreator = ({ setFishGrid, fishGrid }) => {
 
   const createFish = () => {
     if (fishGrid.length < 10) {
-      setFishGrid((prev) => [
+      setFishGrid((prev: unknown[]) => [
         ...prev,
         { fishColor, fishRotate, fishShape, fishSize, fishType }
       ])
